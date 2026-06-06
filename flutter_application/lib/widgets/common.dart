@@ -93,12 +93,14 @@ class AppCard extends StatelessWidget {
   final Widget child;
   final Color color;
   final EdgeInsetsGeometry padding;
+  final bool elevated;
 
   const AppCard({
     super.key,
     required this.child,
     this.color = AppColors.white,
     this.padding = const EdgeInsets.all(18),
+    this.elevated = true,
   });
 
   @override
@@ -110,7 +112,41 @@ class AppCard extends StatelessWidget {
         color: color,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: AppColors.line.withValues(alpha: 0.9)),
-        boxShadow: softShadow,
+        boxShadow: elevated ? softShadow : null,
+      ),
+      child: child,
+    );
+  }
+}
+
+class GlassPanel extends StatelessWidget {
+  final Widget child;
+  final EdgeInsetsGeometry padding;
+  final Color color;
+
+  const GlassPanel({
+    super.key,
+    required this.child,
+    this.padding = const EdgeInsets.all(18),
+    this.color = AppColors.white,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: padding,
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.88),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: AppColors.white.withValues(alpha: 0.7)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.07),
+            blurRadius: 24,
+            offset: const Offset(0, 14),
+          ),
+        ],
       ),
       child: child,
     );
@@ -299,10 +335,9 @@ class HeaderRow extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge
-                    ?.copyWith(fontSize: 26, height: 1.12),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleLarge?.copyWith(fontSize: 26, height: 1.12),
               ),
               if (subtitle.isNotEmpty) ...[
                 const SizedBox(height: 7),
@@ -315,6 +350,62 @@ class HeaderRow extends StatelessWidget {
           ),
         ),
         action,
+      ],
+    );
+  }
+}
+
+class PageHeader extends StatelessWidget {
+  final String eyebrow;
+  final String title;
+  final String subtitle;
+  final Widget? action;
+
+  const PageHeader({
+    super.key,
+    required this.eyebrow,
+    required this.title,
+    required this.subtitle,
+    this.action,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                eyebrow,
+                style: const TextStyle(
+                  color: AppColors.sage,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              const SizedBox(height: 7),
+              Text(
+                title,
+                style: Theme.of(
+                  context,
+                ).textTheme.titleLarge?.copyWith(fontSize: 28, height: 1.08),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                subtitle,
+                style: const TextStyle(
+                  color: AppColors.gray,
+                  fontSize: 15,
+                  height: 1.42,
+                ),
+              ),
+            ],
+          ),
+        ),
+        if (action != null) ...[const SizedBox(width: 12), action!],
       ],
     );
   }
@@ -347,8 +438,7 @@ class CareTaskItem extends StatelessWidget {
           Expanded(
             child: Text(
               text,
-              style:
-                  const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
             ),
           ),
         ],
