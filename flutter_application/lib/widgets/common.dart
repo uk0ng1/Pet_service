@@ -10,21 +10,22 @@ class AppLogo extends StatelessWidget {
     return Row(
       children: [
         Container(
-          width: 42,
-          height: 42,
+          width: 40,
+          height: 40,
           decoration: BoxDecoration(
-            color: AppColors.mint,
-            borderRadius: BorderRadius.circular(15),
+            color: AppColors.charcoal,
+            borderRadius: BorderRadius.circular(8),
           ),
-          child: const Icon(Icons.pets_rounded, color: AppColors.sage),
+          child: const Icon(Icons.pets_rounded, color: AppColors.white),
         ),
         const SizedBox(width: 10),
         const Text(
           'PET TIMES',
           style: TextStyle(
-            fontSize: 22,
+            fontSize: 20,
             fontWeight: FontWeight.w900,
             color: AppColors.charcoal,
+            letterSpacing: 0,
           ),
         ),
       ],
@@ -39,7 +40,7 @@ class ScreenShell extends StatelessWidget {
   const ScreenShell({
     super.key,
     required this.child,
-    this.padding = const EdgeInsets.fromLTRB(24, 22, 24, 24),
+    this.padding = const EdgeInsets.fromLTRB(20, 18, 20, 24),
   });
 
   @override
@@ -69,8 +70,9 @@ class PrimaryButton extends StatelessWidget {
       style: FilledButton.styleFrom(
         backgroundColor: AppColors.sage,
         foregroundColor: AppColors.white,
-        minimumSize: const Size.fromHeight(56),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+        minimumSize: const Size.fromHeight(54),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        elevation: 0,
         textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
       ),
       child: loading
@@ -106,8 +108,8 @@ class AppCard extends StatelessWidget {
       padding: padding,
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.line.withValues(alpha: 0.65)),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: AppColors.line.withValues(alpha: 0.9)),
         boxShadow: softShadow,
       ),
       child: child,
@@ -142,10 +144,10 @@ class StatusChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(999),
+        color: color.withValues(alpha: 0.09),
+        borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
         label,
@@ -174,14 +176,14 @@ class SelectablePill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      borderRadius: BorderRadius.circular(999),
+      borderRadius: BorderRadius.circular(8),
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 160),
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
         decoration: BoxDecoration(
           color: selected ? AppColors.mint : AppColors.white,
-          borderRadius: BorderRadius.circular(999),
+          borderRadius: BorderRadius.circular(8),
           border: Border.all(
             color: selected ? AppColors.sage : AppColors.line,
             width: selected ? 1.4 : 1,
@@ -260,11 +262,11 @@ class AppTextField extends StatelessWidget {
               vertical: 15,
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(8),
               borderSide: const BorderSide(color: AppColors.line),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(8),
               borderSide: const BorderSide(color: AppColors.sage, width: 1.5),
             ),
           ),
@@ -300,7 +302,7 @@ class HeaderRow extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .titleLarge
-                    ?.copyWith(fontSize: 25),
+                    ?.copyWith(fontSize: 26, height: 1.12),
               ),
               if (subtitle.isNotEmpty) ...[
                 const SizedBox(height: 7),

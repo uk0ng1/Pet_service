@@ -3,19 +3,31 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Pet AI · 반려동물 케어 가이드</title>
+<title>Pet Times</title>
 <link rel="stylesheet" href="/web/style.css" />
 </head>
 <body>
-<header>
-  <h1>🐶🐱 Pet AI</h1>
-  <p class="sub">초보 반려인을 위한 RAG 기반 케어 가이드 & 캘린더</p>
+<header class="hero">
+  <nav class="topbar" aria-label="앱 헤더">
+    <div class="brand-mark">PT</div>
+    <span>Pet Times</span>
+  </nav>
+  <div class="hero-copy">
+    <p class="eyebrow">AI pet care assistant</p>
+    <h1>반려생활을 한눈에 관리하세요.</h1>
+    <p class="sub">프로필 등록부터 맞춤 가이드, 케어 캘린더까지 깔끔하게 정리합니다.</p>
+  </div>
 </header>
 
 <main>
-  <!-- 1. 펫 프로필 -->
   <section class="card">
-    <h2>1. 펫 등록</h2>
+    <div class="section-head">
+      <span class="step">01</span>
+      <div>
+        <h2>펫 등록</h2>
+        <p>기본 정보를 입력하면 가이드와 일정의 기준이 됩니다.</p>
+      </div>
+    </div>
     <form id="pet-form" class="grid">
       <label>이름<input name="name" required placeholder="초코" /></label>
       <label>종
@@ -24,31 +36,36 @@
           <option value="cat">고양이</option>
         </select>
       </label>
-      <label>품종<input name="breed" placeholder="말티즈 / 코리안숏헤어 등" /></label>
+      <label>품종<input name="breed" placeholder="말티즈, 코리안숏헤어 등" /></label>
       <label>생년월일<input type="date" name="birth_date" required /></label>
       <label>성별
         <select name="sex" required>
-          <option value="female">암컷</option>
-          <option value="male">수컷</option>
+          <option value="female">여아</option>
+          <option value="male">남아</option>
         </select>
       </label>
       <label>중성화
         <select name="neutered">
-          <option value="false">아니오</option>
+          <option value="false">아니요</option>
           <option value="true">예</option>
         </select>
       </label>
-      <label>체중(kg)<input type="number" name="weight_kg" step="0.1" /></label>
+      <label>체중(kg)<input type="number" name="weight_kg" step="0.1" placeholder="2.8" /></label>
       <div class="form-actions">
-        <button type="submit">등록</button>
+        <button type="submit">등록하기</button>
       </div>
     </form>
     <ul id="pet-list" class="pet-list"></ul>
   </section>
 
-  <!-- 2. 가이드 -->
   <section class="card">
-    <h2>2. 케어 가이드</h2>
+    <div class="section-head">
+      <span class="step">02</span>
+      <div>
+        <h2>AI 케어 가이드</h2>
+        <p>선택한 펫의 상태에 맞춘 관리 포인트를 생성합니다.</p>
+      </div>
+    </div>
     <div class="row">
       <select id="guide-pet"></select>
       <button id="gen-guide">가이드 생성</button>
@@ -56,14 +73,19 @@
     <div id="guide-out" class="guide-out">아직 생성된 가이드가 없습니다.</div>
   </section>
 
-  <!-- 3. 캘린더 -->
   <section class="card">
-    <h2>3. 캘린더</h2>
+    <div class="section-head">
+      <span class="step">03</span>
+      <div>
+        <h2>케어 캘린더</h2>
+        <p>예방접종, 검진, 생활관리 일정을 확인합니다.</p>
+      </div>
+    </div>
     <div class="row">
       <select id="cal-pet"></select>
-      <button id="rebuild">메타 기반 일정 생성</button>
-      <label class="muted">앞으로 <input id="days" type="number" value="90" min="1" max="365" style="width:60px"/>일</label>
-      <button id="load-events">조회</button>
+      <button id="rebuild">일정 생성</button>
+      <label class="muted">앞으로 <input id="days" type="number" value="90" min="1" max="365" />일</label>
+      <button id="load-events" class="secondary">조회</button>
     </div>
     <ul id="events" class="events"></ul>
   </section>
