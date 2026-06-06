@@ -73,7 +73,11 @@ class PrimaryButton extends StatelessWidget {
         minimumSize: const Size.fromHeight(54),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         elevation: 0,
-        textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
+        textStyle: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w800,
+          fontFamily: 'sans-serif',
+        ),
       ),
       child: loading
           ? const SizedBox(
